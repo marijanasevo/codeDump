@@ -38,5 +38,21 @@ function getWebcamVideo() {
     }); 
 }
 
+function webcamVideoToCanvas() {
+  // Adjusting canvas size to video size
+  const width = canvas.width = video.videoWidth;
+  const height = canvas.height = video.videoHeight;
+
+  // Painting webcam video onto canvas
+  return setInterval(() => {
+    ctx.drawImage(video, 0, 0, width, height);
+  }, 17); 
+  // could:
+  // test machine performance and adjust accordingly
+  // implement >>requestAnimationFrame<<?
+}
+
 
 getWebcamVideo();
+
+video?.addEventListener('canplay', webcamVideoToCanvas);
