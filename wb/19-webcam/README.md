@@ -6,5 +6,5 @@ One of the requirements for this challenge is to have a server running. I'm usin
 
 - `<video class="webcam-video">` video from webcam.
 - Repeated interval takes a snapshot of the video.
-- places it into `<canvas class="photo">`. 
-- `<div class="strip">` is a place for snapshots.
+- places it into `<canvas class="canvas-video">`. 
+- `<div class="taken-photos-container">` is a place for snapshots.
