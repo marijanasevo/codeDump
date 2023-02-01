@@ -12,26 +12,52 @@
   <div class="photobooth">
     <div class="controls">
       <button onclick="takePhoto()">Take Photo</button>
-      <div class="rgb">
-        <label for="rmin">Red Min:</label>
-        <input type="range" name="rmin" min="0" max="255">
-        <label for="rmax">Red Max:</label>
-        <input type="range" name="rmax" min="0" max="255">
+        <form>
+          <fieldset class="green-screen">
+            <legend>Green Screen: exclude colors in range: </legend>
+            <label for="rmin">Red Min:</label>
+            <input type="range" name="rmin" min="0" max="255">
+            <label for="rmax">Red Max:</label>
+            <input type="range" name="rmax" min="0" max="255">
+            <br>
+            <label for="gmin">Green Min</label>
+            <input type="range" name="gmin" min="0" max="255">
+            <label for="gmax">Green Max</label>
+            <input type="range" name="gmax" min="0" max="255">
+            <br>
+            <label for="bmin">Blue Min</label>
+            <input type="range" name="bmin" min="0" max="255">
+            <label for="bmax">Blue Max</label>
+            <input type="range" name="bmax" min="0" max="255">
+          </fieldset>
+          <fieldset class="effects">
+            <legend>Filters</legend>
+            <label for="filters">Choose filter: </label>
+            <select id="filters" name="select" id="select-filter">
+              <option value="none" selected>none</option>
+              <option value="red">Red</option>
+              <option value="green">Green</option>
+              <option value="blue">Blue</option>
+              <option value="split">Split</option>
+            </select>
 
-        <br>
-
-        <label for="gmin">Green Min</label>
-        <input type="range" name="gmin" min="0" max="255">
-        <label for="gmax">Green Max</label>
-        <input type="range" name="gmax" min="0" max="255">
-
-        <br>
-
-        <label for="bmin">Blue Min</label>
-        <input type="range" name="bmin" min="0" max="255">
-        <label for="bmax">Blue Max</label>
-        <input type="range" name="bmax" min="0" max="255">
-      </div>
+            <!-- <input type="radio" id="red" name="effects">
+            <label for="red">Red</label>
+            <input type="radio" id="blue" name="effects">
+            <label for="blue">Blue</label>
+            <input type="radio" id="green" name="effects">
+            <label for="green">Green</label>
+            <input type="radio" id="split" name="effects">
+            <label for="split">Split</label>
+            <input type="radio" id="none" name="effects">
+            <label for="none">None</label> -->
+            
+            <div class="ghost-effect">
+              <label for="ghost">Ghost</label>
+              <input id="ghost" type="range" name="ghost" min="0.01" max="1" step="0.01" value="1">
+            </div>
+          </fieldset>
+        </form>
     </div>
 
     <canvas class="canvas-video"></canvas>
