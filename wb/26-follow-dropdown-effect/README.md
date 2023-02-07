@@ -1,3 +1,3 @@
 # Follow dropdown effect
 
-![stripe](https://s9.gifyu.com/images/stripe.gif)
+<img src="https://s9.gifyu.com/images/stripe.gif" width="600">
