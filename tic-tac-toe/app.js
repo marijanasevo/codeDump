@@ -3,7 +3,7 @@ const reset = document.querySelector('.reset button');
 const turn = document.querySelector('.turn span');
 
 let player;
-let playerOneOptionsPlayed, playerTwoOptionsPlayed;
+let xOptionsPlayed, oOptionsPlayed;
 newGame();
 
 function newGame() {
@@ -11,8 +11,8 @@ function newGame() {
 
   tablecells.forEach(tablecell => tablecell.innerHTML = '');
 
-  playerOneOptionsPlayed = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0};
-  playerTwoOptionsPlayed = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0};
+  xOptionsPlayed = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0};
+  oOptionsPlayed = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0};
 }
 
 function playMove() {
@@ -24,7 +24,7 @@ function playMove() {
 }
 
 function isWinner(cell) {
-  let patternPlayed = (player == 'X') ? playerOneOptionsPlayed : playerTwoOptionsPlayed;
+  let patternPlayed = (player == 'X') ? xOptionsPlayed : oOptionsPlayed;
   let currentCellPatternNumbers = cell.classList;
 
   for (let number of currentCellPatternNumbers) {
@@ -45,7 +45,7 @@ function updateCurrentPlayer(newGame = false) {
     player = 'X';
   }
 
-  turn.innerHTML = (player == 'X') ? 'X' : 'O';
+  turn.innerHTML = player;
 }
 
 function gameWon(player) {
