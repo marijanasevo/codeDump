@@ -9,27 +9,12 @@ function newGame() {
   playerOne = true;
   tablecells.forEach(tablecells => tablecells.innerHTML = '');
 
-  playerOneField = {
-    1: 0,
-    2: 0,
-    3: 0,
-    4: 0,
-    5: 0,
-    6: 0,
-    7: 0,
-    8: 0
-  };
-  
-  playerTwoField = {
-    1: 0,
-    2: 0,
-    3: 0,
-    4: 0,
-    5: 0,
-    6: 0,
-    7: 0,
-    8: 0
-  };
+  function resetField() {
+    return { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0};
+  }
+
+  playerOneField = resetField();
+  playerTwoField = resetField();
 }
 
 function playMove() {
