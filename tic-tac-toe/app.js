@@ -5,9 +5,26 @@ let playerOne = true;
 let playerOneField, playerTwoField;
 newGame();
 
+function play() {
+  if (this.firstChild) return;
+
+  this.insertAdjacentHTML('afterbegin', playerOne ? `<span class="x"></span>` : `<span class="circle"></span>`);
+
+  let combinationNumbers = this.classList;
+  console.log(combinationNumbers); 
+
+  let field = (playerOne) ? playerOneField : playerTwoField;
+
+  for (let number of combinationNumbers) {
+    field[number]++;
+    if (field[number] == 3) gameWon(playerOne);
+  }
+
+  playerOne = !playerOne;
+}
+
 function newGame() {
   tablecells.forEach(tablecells => tablecells.innerHTML = '');
-
   playerOneField = {
     1: 0,
     2: 0,
@@ -29,23 +46,6 @@ function newGame() {
     7: 0,
     8: 0
   };
-}
-
-function play() {
-  if (this.firstChild) return;
-
-  this.insertAdjacentHTML('afterbegin', playerOne ? `<span class="x"></span>` : `<span class="circle"></span>`);
-
-  let combinationNumbers = this.classList;
-
-  let field = (playerOne) ? playerOneField : playerTwoField;
-
-  for (let number of combinationNumbers) {
-    field[number]++;
-    if (field[number] == 3) gameWon(playerOne);
-  }
-
-  playerOne = !playerOne;
 }
 
 function gameWon(playerOne) {
