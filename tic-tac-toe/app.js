@@ -1,5 +1,6 @@
 const tablecells = Array.from(document.querySelectorAll('.tic-tac-toe td'));
 const reset = document.querySelector('.reset button');
+const turn = document.querySelector('.turn span');
 
 let playerOne;
 let playerOneField, playerTwoField;
@@ -35,6 +36,7 @@ function playMove() {
   }
 
   playerOne = !playerOne;
+  turn.innerHTML = (playerOne) ? '✗' : 'O';
 }
 
 function gameWon(playerOne) {
