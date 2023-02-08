@@ -7,7 +7,7 @@ newGame();
 
 function newGame() {
   playerOne = true;
-  tablecells.forEach(tablecells => tablecells.innerHTML = '');
+  tablecells.forEach(tablecell => tablecell.innerHTML = '');
 
   function resetField() {
     return { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0};
