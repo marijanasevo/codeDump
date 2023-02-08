@@ -28,7 +28,10 @@ function playMove() {
 
   for (let number of patternNumbers) {
     field[number]++;
-    if (field[number] == 3) gameWon(playerOne);
+    if (field[number] == 3) {
+      gameWon(playerOne);
+      return;
+    }
   }
 
   playerOne = !playerOne;
