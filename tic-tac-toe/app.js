@@ -1,57 +1,66 @@
-const tablecells = Array.from(document.querySelectorAll('.tic-tac-toe td'));
-const reset = document.querySelector('.reset button');
-const turn = document.querySelector('.turn span');
+const tablecells = document.querySelectorAll('.tic-tac-toe td');
+const resetButton = document.querySelector('.reset button');
+const turnContainer = document.querySelector('.turn span');
 
-let player;
-let xOptionsPlayed, oOptionsPlayed;
-newGame();
+class TicTacToe {
 
-function newGame() {
-  updateCurrentPlayer(true);
+  constructor() {
+    // Events
+    tablecells.forEach(tablecell => tablecell.addEventListener('click', (e) => this.playMove(e)));
+    resetButton.addEventListener('click', this.newGame.bind(this));
 
-  tablecells.forEach(tablecell => tablecell.innerHTML = '');
+    // Start the first game
+    this.newGame();
+  }
 
-  xOptionsPlayed = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0};
-  oOptionsPlayed = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0};
-}
+  newGame() {
+    this.updateCurrentPlayer(true);
 
-function playMove() {
-  if (this.firstChild) return;
+    tablecells.forEach(tablecell => tablecell.innerHTML = '');
+
+    this.optionsPlayed = { 
+      'X': { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0},
+      'O': { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0}
+    };
+  }
+
+  updateCurrentPlayer(newGame = false) {
+    if (!newGame) {
+      this.player = (this.player == 'X') ? "O" : 'X';
+    } else {
+      this.player = 'X';
+    }
   
-  this.insertAdjacentHTML('afterbegin', player == 'X' ? `<span class="x"></span>` : `<span class="o"></span>`);
+    turnContainer.innerHTML = this.player;
+  }
 
-  if (!isWinner(this)) updateCurrentPlayer();
-}
-
-function isWinner(cell) {
-  let patternPlayed = (player == 'X') ? xOptionsPlayed : oOptionsPlayed;
-  let currentCellPatternNumbers = cell.classList;
-
-  for (let number of currentCellPatternNumbers) {
-    patternPlayed[number]++;
+  playMove(e) {
+    if (e.currentTarget.firstChild) return;
     
-    if (patternPlayed[number] == 3) {
-      // sheduling gameWon() so browser has a chance to render a move
-      setTimeout(() => gameWon(player), 0);
-      return true;
+    e.target.insertAdjacentHTML('afterbegin', this.player == 'X' ? `<span class="x"></span>` : `<span class="o"></span>`);
+
+    if (!this.isWinner(e.target)) this.updateCurrentPlayer();
+  }
+
+  isWinner(cell) {
+    let patternPlayed = this.optionsPlayed[this.player];
+    let currentCellPatternNumbers = cell.classList;
+
+    for (let number of currentCellPatternNumbers) {
+      patternPlayed[number]++;
+      
+      if (patternPlayed[number] == 3) {
+        // sheduling gameWon() so browser has a chance to render a move
+        setTimeout(() => this.gameWon(), 0);
+        return true;
+      }
     }
   }
-}
 
-function updateCurrentPlayer(newGame = false) {
-  if (!newGame) {
-    player = (player == 'X') ? "O" : 'X';
-  } else {
-    player = 'X';
+  gameWon() {
+    alert((this.player == 'X') ? 'Player X won the game!' : 'Player O won the game!');
+    this.newGame();
   }
-
-  turn.innerHTML = player;
 }
 
-function gameWon(player) {
-  alert((player == 'X') ? 'Player X won the game!' : 'Player O won the game!');
-  newGame();
-}
-
-tablecells.forEach(tablecell => tablecell.addEventListener('click', playMove));
-reset.addEventListener('click', newGame);
+const game = new TicTacToe();
